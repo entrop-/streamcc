@@ -4,6 +4,7 @@ var JSONStream = require('JSONStream');
 // var es = require('event-stream')
 var parser = JSONStream.parse();
 var transform = require('stream-transform');
+var readline = require('readline');
 
 
 
@@ -15,26 +16,37 @@ var chunk='';
 router.get('/', function(req, res, next) {
 
 
-    var pipeline = fs.createReadStream('input/data.ndjson.gz')
-        .pipe(zlib.createGunzip())
-        .on('data', function (data){
+    // var pipeline = fs.createReadStream('input/data.ndjson.gz')
+    //     .pipe(zlib.createGunzip())
+    //     .on('data', function (data){
+    //
+    //         chunk += data;
+    //         console.log('got it');
+    //         // var parser = JSONStream.parse(chunk);
+    //         //
+    //         //
+    //         //
+    //         // parser.on('data', function(unzipped) {
+    //         //     console.log('received:', unzipped.toString());
+    //         // });
+    //         data.toString();
+    //
+    //     })
+    //     // .on('end',function(){
+    //     //
+    //     // })
+    //     // .pipe(process.stdout)
+    //     // .pipe(parser)
+    //     .pipe(fs.createWriteStream('output/data.ndjson'))
+    //     .on('error', function(e) {console.log(e) });
 
-            chunk += data;
+    var lineReader = readline.createInterface({
+        input: fs.createReadStream('input/data.ndjson.gz').pipe(zlib.createGunzip())
+    });
 
-        })
-        .on('end',function(){
-            console.log('got it');
-            var parser = JSONStream.parse(chunk);
-
-
-
-            parser.on('data', function(data) {
-                console.log('received:', data.toString());
-            });
-        })
-        .pipe(fs.createWriteStream('output/data.ndjson'))
-        .on('error', function(e) {console.log(e) });
-
+    lineReader.on('line', function (line) {
+        console.log('Line from file:', line);
+    });
 
     res.send('ppp');
 });
