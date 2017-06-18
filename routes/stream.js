@@ -4,8 +4,6 @@ var JSONStream = require('JSONStream');
 // var es = require('event-stream')
 var parser = JSONStream.parse();
 var transform = require('stream-transform');
-// var json2csv = require('json2csv-stream');
-// var parser = new json2csv();
 
 
 
@@ -38,25 +36,7 @@ router.get('/', function(req, res, next) {
         .on('error', function(e) {console.log(e) });
 
 
-
-
-        // pipeline.on('end', function() {
-        //     console.log('done');
-        //     var stream = fs.createReadStream('input/data.ndjson')
-        //         .pipe(parser)
-        //         .pipe(fs.createWriteStream('output/data.ndjson'));
-        //
-        //     stream.on('data', function(data) {
-        //         console.log('received:', data);
-        //     });
-        //
-        // });
-
-
-
-
-
-    // res.send('ppp');
+    res.send('ppp');
 });
 
 module.exports = router;
