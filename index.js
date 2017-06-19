@@ -16,6 +16,10 @@ var parse = require('JSONStream').parse,
 inStream
     .pipe(zlib.createGunzip())
     .pipe(parse())
+    .on('error', (err) => {
+        console.log('¯\\_(ツ)_/¯');
+        return;
+    })
     .pipe(es.mapSync((data) => {
 
         //recount age
