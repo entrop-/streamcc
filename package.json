@@ -14,6 +14,7 @@
     "express": "~4.15.2",
     "jade": "~1.11.0",
     "json2csv-stream": "^0.1.4",
+    "jsonexport": "^2.0.9",
     "morgan": "~1.8.1",
     "node-sass-middleware": "0.9.8",
     "serve-favicon": "~2.4.2",
