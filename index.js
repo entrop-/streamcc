@@ -7,19 +7,23 @@ var parse = require('JSONStream').parse,
     es = require('event-stream'),
     jsonexport = require('jsonexport'),
 
-    inStream = fs.createReadStream(path.join('input', 'data.ndjson.gz')),
+    inStream = fs.createReadStream(path.join('input', '__data.ndjson.gz')),
     outStream = fs.createWriteStream(path.join('output', 'data.csv')),
 
     avarageFriends = 0,
     userCount = 0;
 
+
+function handleError (error) {
+
+    console.log('¯\\_(ツ)_/¯',error.toString());
+    // this.emit('end');
+}
+
 inStream
     .pipe(zlib.createGunzip())
     .pipe(parse())
-    .on('error', (err) => {
-        console.log('¯\\_(ツ)_/¯');
-        return;
-    })
+    .on('error', handleError)
     .pipe(es.mapSync((data) => {
 
         //recount age
