@@ -11,10 +11,17 @@ var parse = require('JSONStream').parse,
 
 inStream
     .pipe(zlib.createGunzip())
-    .pipe(parse('*'))
+    .pipe(parse())
     .pipe(es.mapSync((data) => {
-    console.log(data);
-            return [data.date, data.type, data.price, data.rate].join(',') + '\n';
+
+        //recount age
+        let bdayYear = new Date(data.personal.birthday).getFullYear();
+        let age = new Date().getFullYear() - bdayYear;
+
+        data.personal.age = age;
+        console.log(data);
+        console.log('---------');
+            return [bdayYear, age,data.personal.age, data.personal.name].join(',') + '\n';
 
 }))
 .pipe(outStream)
