@@ -6,7 +6,9 @@
 * there are no tests. nor docker. i could add it on demand but i really dont want to.
 * `.ndjson` file insilde `input` catalog contains smaller part of an input file for development purposes. theres a "broken" json line inside too.
 * it took me about 6 hours to complete including about an hour of actual typing. it took me a month to sit down and do it, for which please accept my apology.  
-* run `npm install` and then `node .` to run application (im sure youre aware of that i felt obligated to put it down)
+
+## run
+* run `npm install` and then `node .` to run application (im sure youre aware of that, but i felt obligated to put it down)
 
 # original task description:
 
