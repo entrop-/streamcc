@@ -4,6 +4,7 @@
 * `index.js` should contain bootstrap only and mechanism should be in module, but i believe if its simple enough, abstractions should be cut down to minimum. also im lazy.
 * i hate using global variables (for counting average friend count), but (see second point above). also there is no scope and changing prototypes to add them would be a little bit of overkill.
 * there are no tests. nor docker. i could add it on demand but i really dont want to.
+* `.ndjson` file insilde `input` catalog contains smaller part of an input file for development purposes. theres a "broken" json line inside too.
 * it took me about 6 hours to complete including about an hour of actual typing. it took me a month to sit down and do it, for which please accept my apology.  
 
 
