@@ -7,23 +7,26 @@ var parse = require('JSONStream').parse,
     es = require('event-stream'),
     jsonexport = require('jsonexport'),
 
-    inStream = fs.createReadStream(path.join('input', '__data.ndjson.gz')),
+    inStream = fs.createReadStream(path.join('input', 'data.ndjson.gz')),
     outStream = fs.createWriteStream(path.join('output', 'data.csv')),
 
     avarageFriends = 0,
     userCount = 0;
 
 
-function handleError (error) {
+function handleError (error,cb) {
 
     console.log('¯\\_(ツ)_/¯',error.toString());
-    // this.emit('end');
+    return;
 }
 
 inStream
     .pipe(zlib.createGunzip())
+    .on('error', handleError)
+
     .pipe(parse())
     .on('error', handleError)
+
     .pipe(es.mapSync((data) => {
 
         //recount age
@@ -38,10 +41,15 @@ inStream
         return JSON.stringify(data) + '\n';
 
     }))
+    .on('error', handleError)
+
     .pipe(jsonexport())
+    .on('error', handleError)
+
     .pipe(outStream)
     .on('finish', () => {
 
         console.log('average friends: ', avarageFriends / userCount  )
 
-    });
+    })
+    .on('error', handleError);
