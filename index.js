@@ -7,7 +7,7 @@ var parse = require('JSONStream').parse,
     es = require('event-stream'),
     jsonexport = require('jsonexport'),
 
-    inStream = fs.createReadStream(path.join('input', '__data.ndjson.gz')),
+    inStream = fs.createReadStream(path.join('input', 'data.ndjson.gz')),
     outStream = fs.createWriteStream(path.join('output', 'data.csv')),
 
     avarageFriends = 0,
