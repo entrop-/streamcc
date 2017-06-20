@@ -58,6 +58,6 @@ typings/
 .env
 
 .idea/
-input/
+input/__*
 output.txt
 output/
