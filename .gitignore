@@ -61,3 +61,4 @@ typings/
 input/__*
 output.txt
 output/
+.DS_Store
